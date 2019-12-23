@@ -1,0 +1,10 @@
+package com.marcosbarbero.lab.sec.oauth.opaque.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+@Order(1000)
+public class AdminWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+}
