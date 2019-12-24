@@ -4,7 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-@SpringBootApplication//(exclude = { SecurityAutoConfiguration.class }) // disable default boot security config
+// Взято за основу
+// https://blog.marcosbarbero.com/oauth2-centralized-authorization-opaque-jdbc-spring-boot2/
+// https://blog.marcosbarbero.com/centralized-authorization-jwt-spring-boot2/
+
+@SpringBootApplication
 public class OAuth2ServerOpaqueApplication {
 
     public static void main(String... args) {

@@ -3,14 +3,19 @@ package com.marcosbarbero.lab.sec.oauth.opaque.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.method.MethodSecurityMetadataSource;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.sql.DataSource;
 
@@ -56,5 +61,46 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         }
         return userDetailsService;
     }
+
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//
+//        http
+//                .authorizeRequests().antMatchers("/admin/ddt").permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/admin/who").permitAll()
+//                .and()
+//                .httpBasic()
+//                .and()
+//                .csrf().disable();
+//    }
+
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//
+//
+//
+//        //http.authorizeRequests().antMatchers("/admin/**")
+//        //        //.access("hasRole('ROLE_ADMIN')")
+//        //        .access("hasRole('ROLE_ADMIN')");
+//                //.antMatchers("/**").denyAll();
+////
+////                http
+////                .csrf().disable()
+////                .exceptionHandling()
+////                .authenticationEntryPoint(restAuthenticationEntryPoint)
+////                .and()
+////                .authorizeRequests()
+////                .antMatchers("/api/foos").authenticated()
+////                .antMatchers("/api/admin/**").hasRole("ADMIN")
+////                .and()
+////                .formLogin()
+////                .successHandler(mySuccessHandler)
+////                .failureHandler(myFailureHandler)
+////                .and()
+////                .logout();
+//    }
 
 }

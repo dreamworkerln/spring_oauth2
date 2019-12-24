@@ -24,6 +24,7 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 
 import javax.sql.DataSource;
 import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableAuthorizationServer
@@ -72,7 +73,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private ProviderManager createPreAuthProvider() {
         PreAuthenticatedAuthenticationProvider provider = new PreAuthenticatedAuthenticationProvider();
         provider.setPreAuthenticatedUserDetailsService(new UserDetailsByNameServiceWrapper<>(userDetailsService));
-        return new ProviderManager(Arrays.asList(provider));
+        return new ProviderManager(Collections.singletonList(provider));
     }
 
 
@@ -90,22 +91,30 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .tokenServices(tokenServices(endpoints.getClientDetailsService()));
     }
 
+
+    // тут настройка только для OAuth2.0 endpoint'ов
     @Override
     public void configure(final AuthorizationServerSecurityConfigurer oauthServer) {
 
 //        oauthServer.tokenKeyAccess("isAnonymous() || hasAuthority('ROLE_TRUSTED_CLIENT')")
 //                .checkTokenAccess("hasAuthority('ROLE_TRUSTED_CLIENT')");
 
-        oauthServer.tokenKeyAccess("permitAll()");
-        oauthServer.checkTokenAccess("hasAuthority('ROLE_RESOURCE') || hasAuthority('ROLE_ADMIN')");
+        
 
+        oauthServer.passwordEncoder(passwordEncoder);
+        oauthServer.tokenKeyAccess("permitAll()");
+        oauthServer.checkTokenAccess("isAuthenticated()");
+        //oauthServer.checkTokenAccess("permitAll()");
+
+
+        //oauthServer.checkTokenAccess("hasAuthority('ROLE_RESOURCE') || hasAuthority('ROLE_ADMIN')");
 
         //oauthServer.checkTokenAccess("hasAuthority('ROLE_ADMIN')");
 
         //oauthServer.checkTokenAccess("isAuthenticated() && hasAuthority('ROLE_ADMIN')");
         //oauthServer.checkTokenAccess("isAuthenticated()");
         //oauthServer.allowFormAuthenticationForClients();
-        
+
 
 
         //oauthServer.passwordEncoder(passwordEncoder)
