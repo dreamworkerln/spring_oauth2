@@ -3,8 +3,8 @@
 -- OAUTH CREDENTIALS
 
 -- Resource server that wanna check token, password is `respass`
-INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_grant_types, authorities)
-  VALUES ('resource', '{bcrypt}$2a$10$5yMP6gAMsMV9RnH8SPvCzu24e67nRZU1pzPptzIVQvRV/8Sr1RX12', 'read,write', 'password,refresh_token,client_credentials', 'ROLE_RESOURCE');
+-- INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_grant_types, authorities)
+--  VALUES ('resource', '{bcrypt}$2a$10$5yMP6gAMsMV9RnH8SPvCzu24e67nRZU1pzPptzIVQvRV/8Sr1RX12', 'read,write', 'password,refresh_token,client_credentials', 'ROLE_RESOURCE');
 
 -- The encrypted client_secret it `secret`
 INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_grant_types, authorities, access_token_validity, refresh_token_validity)
