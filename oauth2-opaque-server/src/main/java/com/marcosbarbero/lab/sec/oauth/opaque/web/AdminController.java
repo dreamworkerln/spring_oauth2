@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
-@RequestMapping("/profile")
+@RequestMapping("/admin")
 public class AdminController {
 
 
@@ -40,8 +40,8 @@ public class AdminController {
     // https://www.baeldung.com/spring-security-oauth-revoke-tokens
 
 
-    @GetMapping("/me")
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @GetMapping("/check")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public ResponseEntity<Principal> get(final Principal principal) {
         return ResponseEntity.ok(principal);
     }
@@ -49,7 +49,7 @@ public class AdminController {
 
 
     @GetMapping("/ddt")
-    //@Secured("ROLE_ANONYMOUS")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<String> ddt() {
         return ResponseEntity.ok("DDT");
     }

@@ -9,13 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/me")
 public class UserController {
 
-    @GetMapping
+    @GetMapping("/me")
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<Principal> get(final Principal principal) {
         return ResponseEntity.ok(principal);
+    }
+
+    @GetMapping("/ddt")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<String> ddt() {
+        return ResponseEntity.ok("DDT");
     }
 
 }
